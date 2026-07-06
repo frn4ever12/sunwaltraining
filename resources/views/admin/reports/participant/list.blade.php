@@ -5,28 +5,12 @@
 @endsection
 
 @section('content')
-    <div class="page-header">
-        <h3 class="mb-3 fw-bold">सहभागी सूची</h3>
-        <ul class="mb-3 breadcrumbs">
-            <li class="nav-home">
-                <a href="#">
-                    <i class="icon-home"></i>
-                </a>
-            </li>
-            <li class="separator">
-                <i class="icon-arrow-right"></i>
-            </li>
-            <li class="nav-item">
-                <a href="#">प्रतिवेदन</a>
-            </li>
-            <li class="separator">
-                <i class="icon-arrow-right"></i>
-            </li>
-            <li class="nav-item">
-                <a href="#">सहभागी सूची</a>
-            </li>
-        </ul>
-    </div>
+    <section class="mb-3">
+        <div class="d-flex justify-content-end align-items-center">
+            <button class="btn btn-primary" type="button" onclick="printReport()"><i
+                    class="fa fa-print"></i>&nbsp;&nbsp;मुद्रण</button>
+        </div>
+    </section>
 
     <div class="card mb-4">
         <div class="card-body text-center">

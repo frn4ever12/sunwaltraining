@@ -192,7 +192,7 @@
                             <option value="">--कृपया छान्नुहोस्--</option>
                             @foreach (\App\Models\Province::select('id','name')->get() as $province)
                                 <option value="{{ $province->id }}"
-                                    {{ old('province_id', $training->province_id ?? '5') == $province->id ? 'selected' : '' }}>
+                                    {{ old('province_id', $training->province_id ?? '') == $province->id ? 'selected' : '' }}>
                                     {{ $province->name }}</option>
                             @endforeach
                         </select>
@@ -206,7 +206,7 @@
                             <option value="">--कृपया छान्नुहोस्--</option>
                             @foreach (\App\Models\District::select('id','name')->get() as $district)
                                 <option value="{{ $district->id }}"
-                                    {{ old('district_id', $training->district_id ?? '58') == $district->id ? 'selected' : '' }}>
+                                    {{ old('district_id', $training->district_id ?? '') == $district->id ? 'selected' : '' }}>
                                     {{ $district->name }}</option>
                             @endforeach
                         </select>
@@ -222,7 +222,7 @@
                             <option value="">--कृपया छान्नुहोस्--</option>
                             @foreach (\App\Models\SthaniyaTaha::select('id','name')->get() as $area)
                                 <option value="{{ $area->id }}"
-                                    {{ old('sthaniya_taha_id', $training->sthaniya_taha_id ?? '576') == $area->id ? 'selected' : '' }}>
+                                    {{ old('sthaniya_taha_id', $training->sthaniya_taha_id ?? '') == $area->id ? 'selected' : '' }}>
                                     {{ $area->name }}
                                 </option>
                             @endforeach
