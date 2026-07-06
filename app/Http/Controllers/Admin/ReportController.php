@@ -421,17 +421,34 @@ class ReportController extends Controller
     {
         $query = \App\Models\TrainingAttendance::query();
         
-        if (!empty(request()->input('date'))) {
-            $query->whereDate('attendance_date', request()->input('date'));
-        }
         if (!empty(request()->input('training_id'))) {
             $query->where('training_id', request()->input('training_id'));
         }
 
         $attendances = $query->with(['training', 'trainingApplication'])
-            ->select('id', 'training_id', 'training_application_id', 'attendance_date', 'status', 'remarks')
-            ->orderBy('attendance_date', 'desc')
-            ->get();
+            ->get()
+            ->map(function ($record) {
+                $flattened = [];
+                if (is_array($record->attendance)) {
+                    foreach ($record->attendance as $date => $status) {
+                        $flattened[] = [
+                            'id' => $record->id,
+                            'training' => $record->training,
+                            'trainingApplication' => $record->trainingApplication,
+                            'attendance_date' => $date,
+                            'status' => $status == 1 ? 'present' : 'absent',
+                        ];
+                    }
+                }
+                return $flattened;
+            })
+            ->flatten(1)
+            ->sortByDesc('attendance_date')
+            ->values();
+
+        if (!empty(request()->input('date'))) {
+            $attendances = $attendances->where('attendance_date', request()->input('date'));
+        }
 
         $trainings = \App\Models\Training::all();
 
@@ -442,20 +459,41 @@ class ReportController extends Controller
     {
         $query = \App\Models\TrainingAttendance::query();
         
-        if (!empty(request()->input('month'))) {
-            $query->whereMonth('attendance_date', request()->input('month'));
-        }
-        if (!empty(request()->input('year'))) {
-            $query->whereYear('attendance_date', request()->input('year'));
-        }
         if (!empty(request()->input('training_id'))) {
             $query->where('training_id', request()->input('training_id'));
         }
 
         $attendances = $query->with(['training', 'trainingApplication'])
-            ->select('id', 'training_id', 'training_application_id', 'attendance_date', 'status')
-            ->orderBy('attendance_date', 'desc')
-            ->get();
+            ->get()
+            ->map(function ($record) {
+                $flattened = [];
+                if (is_array($record->attendance)) {
+                    foreach ($record->attendance as $date => $status) {
+                        $flattened[] = [
+                            'id' => $record->id,
+                            'training' => $record->training,
+                            'trainingApplication' => $record->trainingApplication,
+                            'attendance_date' => $date,
+                            'status' => $status == 1 ? 'present' : 'absent',
+                        ];
+                    }
+                }
+                return $flattened;
+            })
+            ->flatten(1)
+            ->sortByDesc('attendance_date')
+            ->values();
+
+        if (!empty(request()->input('month'))) {
+            $attendances = $attendances->filter(function ($item) {
+                return date('n', strtotime($item['attendance_date'])) == request()->input('month');
+            });
+        }
+        if (!empty(request()->input('year'))) {
+            $attendances = $attendances->filter(function ($item) {
+                return date('Y', strtotime($item['attendance_date'])) == request()->input('year');
+            });
+        }
 
         $trainings = \App\Models\Training::all();
 
@@ -471,17 +509,34 @@ class ReportController extends Controller
                 $q->where('application_no', 'like', '%' . request()->input('application_no') . '%');
             });
         }
-        if (!empty(request()->input('start_date'))) {
-            $query->whereDate('attendance_date', '>=', request()->input('start_date'));
-        }
-        if (!empty(request()->input('end_date'))) {
-            $query->whereDate('attendance_date', '<=', request()->input('end_date'));
-        }
 
         $attendances = $query->with(['training', 'trainingApplication'])
-            ->select('id', 'training_id', 'training_application_id', 'attendance_date', 'status')
-            ->orderBy('attendance_date', 'desc')
-            ->get();
+            ->get()
+            ->map(function ($record) {
+                $flattened = [];
+                if (is_array($record->attendance)) {
+                    foreach ($record->attendance as $date => $status) {
+                        $flattened[] = [
+                            'id' => $record->id,
+                            'training' => $record->training,
+                            'trainingApplication' => $record->trainingApplication,
+                            'attendance_date' => $date,
+                            'status' => $status == 1 ? 'present' : 'absent',
+                        ];
+                    }
+                }
+                return $flattened;
+            })
+            ->flatten(1)
+            ->sortByDesc('attendance_date')
+            ->values();
+
+        if (!empty(request()->input('start_date'))) {
+            $attendances = $attendances->where('attendance_date', '>=', request()->input('start_date'));
+        }
+        if (!empty(request()->input('end_date'))) {
+            $attendances = $attendances->where('attendance_date', '<=', request()->input('end_date'));
+        }
 
         return view('admin.reports.attendance.participant', compact('attendances'));
     }
@@ -490,22 +545,41 @@ class ReportController extends Controller
     {
         $query = \App\Models\TrainingAttendance::query();
         
-        if (!empty(request()->input('date'))) {
-            $query->whereDate('attendance_date', request()->input('date'));
-        }
         if (!empty(request()->input('training_id'))) {
             $query->where('training_id', request()->input('training_id'));
         }
 
-        $absents = $query->where('status', 'absent')
-            ->with(['training', 'trainingApplication'])
-            ->select('id', 'training_id', 'training_application_id', 'attendance_date', 'status', 'remarks')
-            ->orderBy('attendance_date', 'desc')
-            ->get();
+        $attendances = $query->with(['training', 'trainingApplication'])
+            ->get()
+            ->map(function ($record) {
+                $flattened = [];
+                if (is_array($record->attendance)) {
+                    foreach ($record->attendance as $date => $status) {
+                        if ($status == 0) {
+                            $flattened[] = [
+                                'id' => $record->id,
+                                'training' => $record->training,
+                                'trainingApplication' => $record->trainingApplication,
+                                'attendance_date' => $date,
+                                'status' => 'absent',
+                                'remarks' => '-',
+                            ];
+                        }
+                    }
+                }
+                return $flattened;
+            })
+            ->flatten(1)
+            ->sortByDesc('attendance_date')
+            ->values();
+
+        if (!empty(request()->input('date'))) {
+            $attendances = $attendances->where('attendance_date', request()->input('date'));
+        }
 
         $trainings = \App\Models\Training::all();
 
-        return view('admin.reports.attendance.absent', compact('absents', 'trainings'));
+        return view('admin.reports.attendance.absent', compact('attendances', 'trainings'));
     }
 
     // Trainer Reports

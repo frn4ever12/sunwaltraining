@@ -24,6 +24,15 @@
         </ul>
     </div>
 
+    <div class="card mb-4">
+        <div class="card-body text-center">
+            <h5 class="fw-bold">सुनवल नगरपालिका</h5>
+            <h6 class="fw-bold">कार्यपालिकाको कार्यालय</h6>
+            <p class="mb-0">सुनवल बजार, नवलपरासी (बर्दघाट सुस्ता पश्चिम), लुम्बिनी प्रदेश, नेपाल</p>
+            <p class="mb-0">नवलपरासी (बर्दघाट सुस्ता पश्चिम), लुम्बिऴी, नेपाल</p>
+        </div>
+    </div>
+
     <div class="card my-4">
         <div class="card-header">
             <div class="d-flex justify-content-between align-items-center">

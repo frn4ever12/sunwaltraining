@@ -28,6 +28,15 @@
         </ul>
     </div>
 
+    <div class="card mb-4">
+        <div class="card-body text-center">
+            <h5 class="fw-bold">सुनवल नगरपालिका</h5>
+            <h6 class="fw-bold">कार्यपालिकाको कार्यालय</h6>
+            <p class="mb-0">सुनवल बजार, नवलपरासी (बर्दघाट सुस्ता पश्चिम), लुम्बिनी प्रदेश, नेपाल</p>
+            <p class="mb-0">नवलपरासी (बर्दघाट सुस्ता पश्चिम), लुम्बिऴी, नेपाल</p>
+        </div>
+    </div>
+
     <div class="card my-4">
         <div class="card-header">
             <div class="d-flex justify-content-between align-items-center">
@@ -76,13 +85,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($absents as $index => $absent)
+                        @foreach($attendances as $index => $attendance)
                         <tr>
                             <td>{{ $index + 1 }}</td>
-                            <td>{{ $absent->training->name_np ?? '-' }}</td>
-                            <td>{{ $absent->trainingApplication->fullname_np ?? '-' }}</td>
-                            <td>{{ $absent->attendance_date ?? '-' }}</td>
-                            <td>{{ $absent->remarks ?? '-' }}</td>
+                            <td>{{ $attendance['training']->name_np ?? '-' }}</td>
+                            <td>{{ $attendance['trainingApplication']->fullname_np ?? '-' }}</td>
+                            <td>{{ $attendance['attendance_date'] ?? '-' }}</td>
+                            <td>{{ $attendance['remarks'] ?? '-' }}</td>
                         </tr>
                         @endforeach
                     </tbody>
