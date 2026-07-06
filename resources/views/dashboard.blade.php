@@ -12,17 +12,19 @@
                 </div>
                 <!-- कुल तालिम -->
                 <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="card stats-card flex-row align-items-center text-white border-0"
-                        style="background: linear-gradient(135deg, #f85008, #f42f2f); min-height: 140px;">
-                        <div class="p-4 d-flex align-items-center justify-content-center" style="flex: 0 0 100px;">
-                            <i class="fa fa-users fa-3x background-icon"></i>
-                        </div>
-                        <div class="flex-grow-1 py-3 px-4">
-                            <h3 class="fw-bold mb-1 npNum">{{ \App\Models\Training::count() ?? 0 }}</h3>
-                            <p class="mb-1 fs-5 fw-bold">कुल तालिम</p>
+                    <a href="{{ route('admin.trainings.index') }}" class="text-decoration-none">
+                        <div class="card stats-card flex-row align-items-center text-white border-0"
+                            style="background: linear-gradient(135deg, #f85008, #f42f2f); min-height: 140px; cursor: pointer;">
+                            <div class="p-4 d-flex align-items-center justify-content-center" style="flex: 0 0 100px;">
+                                <i class="fa fa-users fa-3x background-icon"></i>
+                            </div>
+                            <div class="flex-grow-1 py-3 px-4">
+                                <h3 class="fw-bold mb-1 npNum">{{ \App\Models\Training::count() ?? 0 }}</h3>
+                                <p class="mb-1 fs-5 fw-bold">कुल तालिम</p>
 
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
 
                 <!-- कुल आवेदन -->
@@ -40,63 +42,71 @@
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="card stats-card flex-row align-items-center text-white border-0"
-                        style="background: linear-gradient(135deg, #059e7a, #28cba7); min-height: 140px;">
-                        <div class="p-4 d-flex align-items-center justify-content-center" style="flex: 0 0 100px;">
-                            <i class="fa fa-file-alt fa-3x background-icon"></i>
-                        </div>
-                        <div class="flex-grow-1 py-3 px-4">
-                            <h3 class="fw-bold mb-1 npNum">{{ \App\Models\TrainingApplication::where('status','approved')->count() ?? 0 }}</h3>
-                            <p class="mb-1 fs-5 fw-bold">स्वीकृत आवेदन</p>
+                    <a href="{{ route('admin.reports.application.approved') }}" class="text-decoration-none">
+                        <div class="card stats-card flex-row align-items-center text-white border-0"
+                            style="background: linear-gradient(135deg, #059e7a, #28cba7); min-height: 140px; cursor: pointer;">
+                            <div class="p-4 d-flex align-items-center justify-content-center" style="flex: 0 0 100px;">
+                                <i class="fa fa-file-alt fa-3x background-icon"></i>
+                            </div>
+                            <div class="flex-grow-1 py-3 px-4">
+                                <h3 class="fw-bold mb-1 npNum">{{ \App\Models\TrainingApplication::where('status','approved')->count() ?? 0 }}</h3>
+                                <p class="mb-1 fs-5 fw-bold">स्वीकृत आवेदन</p>
 
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 
                 <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="card stats-card flex-row align-items-center text-white border-0"
-                        style="background: linear-gradient(135deg, #06b865, rgb(6, 195, 154)); min-height: 140px;">
-                        <div class="p-4 d-flex align-items-center justify-content-center" style="flex: 0 0 100px;">
-                            <i class="fa fa-clock fa-3x background-icon"></i>
-                        </div>
-                        <div class="flex-grow-1 py-3 px-4">
-                            <h3 class="fw-bold mb-1 npNum">
-                                {{ \App\Models\Training::where('status', 'upcoming')->count() ?? 0 }}
-                            </h3>
-                            <p class="mb-1 fs-5 fw-bold">आगामी आउन लागेको तालिम</p>
+                    <a href="{{ route('admin.trainings.index') }}?status=upcoming" class="text-decoration-none">
+                        <div class="card stats-card flex-row align-items-center text-white border-0"
+                            style="background: linear-gradient(135deg, #06b865, rgb(6, 195, 154)); min-height: 140px; cursor: pointer;">
+                            <div class="p-4 d-flex align-items-center justify-content-center" style="flex: 0 0 100px;">
+                                <i class="fa fa-clock fa-3x background-icon"></i>
+                            </div>
+                            <div class="flex-grow-1 py-3 px-4">
+                                <h3 class="fw-bold mb-1 npNum">
+                                    {{ \App\Models\Training::where('status', 'upcoming')->count() ?? 0 }}
+                                </h3>
+                                <p class="mb-1 fs-5 fw-bold">आगामी आउन लागेको तालिम</p>
 
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
 <!-- सम्पन्न तालिम -->
 <div class="col-lg-4 col-md-6 col-sm-12">
-    <div class="card stats-card flex-row align-items-center text-white border-0"
-        style="background: linear-gradient(135deg, #2569f1, #0e4ecf); min-height: 140px;">
-        <div class="p-4 d-flex align-items-center justify-content-center" style="flex: 0 0 100px;">
-            <i class="fa fa-check-circle fa-3x background-icon"></i>
-        </div>
-        <div class="flex-grow-1 py-3 px-4">
-            <h3 class="fw-bold mb-1 npNum">
-                {{ \App\Models\Training::where('status', 'completed')->count() ?? 0 }}
-            </h3>
-            <p class="mb-1 fs-5 fw-bold">सम्पन्न तालिम</p>
+    <a href="{{ route('admin.reports.training.completed') }}" class="text-decoration-none">
+        <div class="card stats-card flex-row align-items-center text-white border-0"
+            style="background: linear-gradient(135deg, #2569f1, #0e4ecf); min-height: 140px; cursor: pointer;">
+            <div class="p-4 d-flex align-items-center justify-content-center" style="flex: 0 0 100px;">
+                <i class="fa fa-check-circle fa-3x background-icon"></i>
+            </div>
+            <div class="flex-grow-1 py-3 px-4">
+                <h3 class="fw-bold mb-1 npNum">
+                    {{ \App\Models\Training::where('status', 'completed')->count() ?? 0 }}
+                </h3>
+                <p class="mb-1 fs-5 fw-bold">सम्पन्न तालिम</p>
 
+            </div>
         </div>
-    </div>
+    </a>
 </div>
                 <!-- आगामी तालिम -->
                 <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="card stats-card flex-row align-items-center text-white border-0"
-                        style="background: linear-gradient(135deg, #f94144, #f3722c); min-height: 140px;">
-                        <div class="p-4 d-flex align-items-center justify-content-center" style="flex: 0 0 100px;">
-                            <i class="fa fa-calendar-alt fa-3x background-icon"></i>
+                    <a href="{{ route('admin.trainings.index') }}?status=active" class="text-decoration-none">
+                        <div class="card stats-card flex-row align-items-center text-white border-0"
+                            style="background: linear-gradient(135deg, #f94144, #f3722c); min-height: 140px; cursor: pointer;">
+                            <div class="p-4 d-flex align-items-center justify-content-center" style="flex: 0 0 100px;">
+                                <i class="fa fa-calendar-alt fa-3x background-icon"></i>
+                            </div>
+                            <div class="flex-grow-1 py-3 px-4">
+                                <h3 class="fw-bold mb-1 npNum">{{ \App\Models\Training::where('status', 'active')->count() ?? 0 }}
+                                </h3>
+                                <p class="mb-1 fs-5 fw-bold">चलीरहेको तालिम</p>
+                            </div>
                         </div>
-                        <div class="flex-grow-1 py-3 px-4">
-                            <h3 class="fw-bold mb-1 npNum">{{ \App\Models\Training::where('status', 'active')->count() ?? 0 }}
-                            </h3>
-                            <p class="mb-1 fs-5 fw-bold">चलीरहेको तालिम</p>
-                        </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-md-6 col-sm-12">
                     <div class="card shadow-none">
@@ -115,35 +125,39 @@
             @endunlessrole
             @role('trainee')
                 <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="card stats-card flex-row align-items-center text-white border-0"
-                        style="background: linear-gradient(135deg, #f94144, #f3722c); min-height: 140px;">
-                        <div class="p-4 d-flex align-items-center justify-content-center" style="flex: 0 0 100px;">
-                            <i class="fa fa-file-alt fa-3x background-icon"></i>
+                    <a href="{{ route('training-application.index') }}" class="text-decoration-none">
+                        <div class="card stats-card flex-row align-items-center text-white border-0"
+                            style="background: linear-gradient(135deg, #f94144, #f3722c); min-height: 140px; cursor: pointer;">
+                            <div class="p-4 d-flex align-items-center justify-content-center" style="flex: 0 0 100px;">
+                                <i class="fa fa-file-alt fa-3x background-icon"></i>
+                            </div>
+                            <div class="flex-grow-1 py-3 px-4">
+                                <h3 class="fw-bold mb-1 npNum">
+                                    {{ \App\Models\TrainingApplication::where('user_id', Auth::id())->count() ?? 0 }}
+                                </h3>
+                                <p class="mb-1 fs-5 fw-bold">मेरो कुल आवेदन</p>
+                            </div>
                         </div>
-                        <div class="flex-grow-1 py-3 px-4">
-                            <h3 class="fw-bold mb-1 npNum">
-                                {{ \App\Models\TrainingApplication::where('user_id', Auth::id())->count() ?? 0 }}
-                            </h3>
-                            <p class="mb-1 fs-5 fw-bold">मेरो कुल आवेदन</p>
-                        </div>
-                    </div>
+                    </a>
                 </div>
 
                 <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="card stats-card flex-row align-items-center text-white border-0"
-                        style="background: linear-gradient(135deg, #059e7a, #28cba7); min-height: 140px;">
-                        <div class="p-4 d-flex align-items-center justify-content-center" style="flex: 0 0 100px;">
-                            <i class="fa fa-certificate fa-3x background-icon"></i>
+                    <a href="{{ route('training-application.index') }}" class="text-decoration-none">
+                        <div class="card stats-card flex-row align-items-center text-white border-0"
+                            style="background: linear-gradient(135deg, #059e7a, #28cba7); min-height: 140px; cursor: pointer;">
+                            <div class="p-4 d-flex align-items-center justify-content-center" style="flex: 0 0 100px;">
+                                <i class="fa fa-certificate fa-3x background-icon"></i>
+                            </div>
+                            <div class="flex-grow-1 py-3 px-4">
+                                <h3 class="fw-bold mb-1 npNum">
+                                    {{ \App\Models\TrainingCertification::whereHas('trainingApplication', function($q) {
+                                        $q->where('user_id', Auth::id());
+                                    })->where('status', '1')->count() ?? 0 }}
+                                </h3>
+                                <p class="mb-1 fs-5 fw-bold">मेरो प्रमाणपत्र</p>
+                            </div>
                         </div>
-                        <div class="flex-grow-1 py-3 px-4">
-                            <h3 class="fw-bold mb-1 npNum">
-                                {{ \App\Models\TrainingCertification::whereHas('trainingApplication', function($q) {
-                                    $q->where('user_id', Auth::id());
-                                })->where('status', '1')->count() ?? 0 }}
-                            </h3>
-                            <p class="mb-1 fs-5 fw-bold">मेरो प्रमाणपत्र</p>
-                        </div>
-                    </div>
+                    </a>
                 </div>
 
                 <div class="col-12 mt-4">
