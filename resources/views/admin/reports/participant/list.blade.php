@@ -139,4 +139,5 @@
             });
         });
     </script>
+    <script src="{{ asset('Backend/assets/js/print.js') }}"></script>
 @endsection

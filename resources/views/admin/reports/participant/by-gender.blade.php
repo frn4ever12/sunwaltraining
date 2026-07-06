@@ -1,37 +1,12 @@
 @extends('admin.includes.main')
 
 @section('content')
-    <div class="page-header">
-        <h3 class="mb-3 fw-bold">लिङ्ग अनुसार सहभागी</h3>
-        <ul class="mb-3 breadcrumbs">
-            <li class="nav-home">
-                <a href="#">
-                    <i class="icon-home"></i>
-                </a>
-            </li>
-            <li class="separator">
-                <i class="icon-arrow-right"></i>
-            </li>
-            <li class="nav-item">
-                <a href="#">प्रतिवेदन</a>
-            </li>
-            <li class="separator">
-                <i class="icon-arrow-right"></i>
-            </li>
-            <li class="nav-item">
-                <a href="#">लिङ्ग अनुसार सहभागी</a>
-            </li>
-        </ul>
-    </div>
-
-    <div class="card mb-4">
-        <div class="card-body text-center">
-            <h5 class="fw-bold">सुनवल नगरपालिका</h5>
-            <h6 class="fw-bold">कार्यपालिकाको कार्यालय</h6>
-            <p class="mb-0">सुनवल बजार, नवलपरासी (बर्दघाट सुस्ता पश्चिम), लुम्बिनी प्रदेश, नेपाल</p>
-            <p class="mb-0">नवलपरासी (बर्दघाट सुस्ता पश्चिम), लुम्बिऴी, नेपाल</p>
+    <section class="mb-3">
+        <div class="d-flex justify-content-end align-items-center">
+            <button class="btn btn-primary" type="button" onclick="printReport()"><i
+                    class="fa fa-print"></i>&nbsp;&nbsp;मुद्रण</button>
         </div>
-    </div>
+    </section>
 
     <div class="card my-4">
         <div class="card-header">
@@ -62,7 +37,30 @@
                 </div>
             </form>
         </div>
+
+    <div class="card shadow-sm my-4" id="printSection">
         <div class="card-body">
+            <div class="row align-items-center">
+                <div class="col-2">
+                    <img src="{{ asset('dist/img/logo/Government_Logo.png') }}" class="img-fluid"
+                        style="max-height: 90px;">
+                </div>
+                <div class="col-8 text-center text-danger">
+                    <h2 class="fw-bold"><b>{{ get_detail()->palika_name ?? '' }}</b></h2>
+                    <h3 class="fw-bold"><b>{{ get_detail()->palika_karyalaya ?? '' }}</b></h3>
+                    <h5 class="fw-bold npNum"><b>{{ get_detail()->address ?? '' }},
+                            {{ get_detail()->district->name ?? '' }}</b></h5>
+                    <p class="fw-bold mb-0"><b>{{ get_detail()->province->name ?? '' }}, नेपाल</b></p>
+                </div>
+                <div class="col-2 text-end">
+                    @if (isset(get_detail()->logo))
+                        <img src="{{ route('file.show', urlencode('/' . get_detail()->logo)) }}" class="img-fluid"
+                            style="max-height: 90px;">
+                    @endif
+                </div>
+            </div>
+
+            <h2 class="fw-bold mt-4">लिङ्ग अनुसार सहभागी प्रतिवेदन</h2>
             <div class="row">
                 <div class="col-md-3 mb-4">
                     <div class="card bg-info text-white">
@@ -109,4 +107,5 @@
             });
         });
     </script>
+    <script src="{{ asset('Backend/assets/js/print.js') }}"></script>
 @endsection

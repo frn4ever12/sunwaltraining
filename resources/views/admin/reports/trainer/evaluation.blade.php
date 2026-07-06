@@ -5,37 +5,12 @@
 @endsection
 
 @section('content')
-    <div class="page-header">
-        <h3 class="mb-3 fw-bold">प्रशिक्षक मूल्याङ्कन प्रतिवेदन</h3>
-        <ul class="mb-3 breadcrumbs">
-            <li class="nav-home">
-                <a href="#">
-                    <i class="icon-home"></i>
-                </a>
-            </li>
-            <li class="separator">
-                <i class="icon-arrow-right"></i>
-            </li>
-            <li class="nav-item">
-                <a href="#">प्रतिवेदन</a>
-            </li>
-            <li class="separator">
-                <i class="icon-arrow-right"></i>
-            </li>
-            <li class="nav-item">
-                <a href="#">प्रशिक्षक मूल्याङ्कन प्रतिवेदन</a>
-            </li>
-        </ul>
-    </div>
-
-    <div class="card mb-4">
-        <div class="card-body text-center">
-            <h5 class="fw-bold">सुनवल नगरपालिका</h5>
-            <h6 class="fw-bold">कार्यपालिकाको कार्यालय</h6>
-            <p class="mb-0">सुनवल बजार, नवलपरासी (बर्दघाट सुस्ता पश्चिम), लुम्बिनी प्रदेश, नेपाल</p>
-            <p class="mb-0">नवलपरासी (बर्दघाट सुस्ता पश्चिम), लुम्बिऴी, नेपाल</p>
+    <section class="mb-3">
+        <div class="d-flex justify-content-end align-items-center">
+            <button class="btn btn-primary" type="button" onclick="printReport()"><i
+                    class="fa fa-print"></i>&nbsp;&nbsp;मुद्रण</button>
         </div>
-    </div>
+    </section>
 
     <div class="card my-4">
         <div class="card-header">
@@ -95,6 +70,30 @@
                         </tr>
                         @endforeach
                     </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('scripts')
+    @include('admin.includes.datatables-scripts')
+    <script>
+        $(document).ready(function() {
+            $('#evaluationTable').DataTable({
+                language: {
+                    url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/ne.json"
+                },
+                order: [[4, 'desc']]
+            });
+
+            $('#filterToggle').click(function() {
+                $('#filterForm').collapse('toggle');
+            });
+        });
+    </script>
+    <script src="{{ asset('Backend/assets/js/print.js') }}"></script>
+@endsection
                 </table>
             </div>
         </div>

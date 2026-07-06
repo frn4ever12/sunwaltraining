@@ -129,4 +129,53 @@
             });
         });
     </script>
+    <script src="{{ asset('Backend/assets/js/print.js') }}"></script>
+@endsection
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($trainings as $index => $training)
+                        <tr>
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ $training->name_np ?? '-' }}</td>
+                            <td>{{ $training->start_miti_bs ?? '-' }}</td>
+                            <td>{{ $training->end_miti_bs ?? '-' }}</td>
+                            <td>
+                                @if($training->status == 'upcoming')
+                                    <span class="badge bg-info">आगामी</span>
+                                @elseif($training->status == 'ongoing')
+                                    <span class="badge bg-success">चलिरहेको</span>
+                                @elseif($training->status == 'completed')
+                                    <span class="badge bg-secondary">सम्पन्न</span>
+                                @else
+                                    <span class="badge bg-warning">{{ $training->status ?? '-' }}</span>
+                                @endif
+                            </td>
+                            <td>{{ $training->available_seats ?? '-' }}</td>
+                            <td>{{ $training->training_applications_count ?? 0 }}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('scripts')
+    @include('admin.includes.datatables-scripts')
+    <script>
+        $(document).ready(function() {
+            $('#trainingProgressTable').DataTable({
+                language: {
+                    url: "//cdn.datatables.net/plug-ins/1.13.6/i18n/ne.json"
+                },
+                order: [[2, 'desc']]
+            });
+
+            $('#filterToggle').click(function() {
+                $('#filterForm').collapse('toggle');
+            });
+        });
+    </script>
 @endsection
