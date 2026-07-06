@@ -13,6 +13,7 @@ use App\Http\Controllers\Frontend\TrainingController;
 use App\Http\Controllers\Frontend\PrakashanController;
 use App\Http\Controllers\Frontend\TrainingApplicationController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -60,6 +61,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Trainee certificate view route
     Route::get('training-{training}/my-certificate', [TrainingApplicationController::class, 'viewCertificate'])
         ->name('training-application.view-certificate');
+
+    // Notification routes
+    Route::get('notifications', [NotificationController::class, 'index'])->name('notifications.index');
+    Route::post('notifications/{id}/mark-read', [NotificationController::class, 'markAsRead'])->name('notifications.mark-read');
+    Route::post('notifications/mark-all-read', [NotificationController::class, 'markAllAsRead'])->name('notifications.mark-all-read');
 });
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
