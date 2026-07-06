@@ -226,6 +226,7 @@ document.addEventListener('DOMContentLoaded', function() {
             e.stopPropagation(); // Prevent dropdown from closing
             const id = link.dataset.id;
             const url = link.href;
+            const notificationItem = link.closest('.dropdown-item');
             
             fetch('{{ route("notifications.mark-read", ":id") }}'.replace(':id', id), {
                 method: 'POST',
@@ -237,6 +238,10 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
+                    // Remove notification from dropdown
+                    if (notificationItem) {
+                        notificationItem.remove();
+                    }
                     loadNotifications();
                     // Navigate to the application data
                     window.location.href = url;
