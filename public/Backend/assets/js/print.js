@@ -19,6 +19,48 @@ function printReport(format=null) {
         newWindow.document.write(
             "<style>.custom-list li{display:flex;gap:2px;padding-bottom:1rem}.detail{width:70%;height:100%;margin:0 auto;display:flex;justify-content:space-between;align-items:center;text-align:left;padding:0!important}.detail-box{width:80px;height:80px;display:flex;flex-direction:column;align-items:center;justify-content:center;border:1px solid black;box-sizing:border-box}.rotated{width:100vh;height:100%;overflow:hidden;margin-left:1rem;transform:rotate(-90deg);margin-bottom:20px;text-align:justify}@media print{.rotated{width:100%;height:80vh;margin-left:3rem}}</style>"  );
     }
+    newWindow.document.write(`
+        <style>
+            @media print {
+                .dataTables_length,
+                .dataTables_info,
+                .dataTables_paginate,
+                .pagination,
+                .page-item,
+                .page-link {
+                    display: none !important;
+                }
+                
+                table {
+                    page-break-inside: auto !important;
+                    break-inside: auto !important;
+                }
+                
+                tr {
+                    page-break-inside: avoid !important;
+                    break-inside: avoid !important;
+                }
+                
+                .table-responsive {
+                    overflow: visible !important;
+                }
+                
+                .btn,
+                .no-print {
+                    display: none !important;
+                }
+                
+                @page {
+                    margin: 0.5in;
+                    size: A4;
+                }
+                
+                table, th, td {
+                    border: 1px solid black !important;
+                }
+            }
+        </style>
+    `);
     newWindow.document.write("</head><body >");
     newWindow.document.write(tempDiv.innerHTML);
     newWindow.document.write("</body></html>");
