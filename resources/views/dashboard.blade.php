@@ -29,7 +29,7 @@
 
                 <!-- कुल आवेदन -->
                 <div class="col-lg-4 col-md-6 col-sm-12">
-                    <a href="{{ route('applicants.index') }}" class="text-decoration-none">
+                    <a href="{{ route('reports.application.received') }}" class="text-decoration-none">
                         <div class="card stats-card flex-row align-items-center text-white border-0"
                             style="background: linear-gradient(135deg, #fad70b, #fdc305); min-height: 140px; cursor: pointer;">
                             <div class="p-4 d-flex align-items-center justify-content-center" style="flex: 0 0 100px;">
