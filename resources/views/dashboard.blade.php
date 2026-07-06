@@ -176,7 +176,7 @@
                                                     <td>{{ $cert->certified_date ?? '' }}</td>
                                                     <td>
                                                         @if($cert->certificate)
-                                                            <a href="{{ route('admin.certifications.show', $cert->training->id) }}" 
+                                                            <a href="{{ route('training-application.view-certificate', $cert->training->id) }}" 
                                                                target="_blank" 
                                                                class="btn btn-sm btn-primary">
                                                                 <i class="fa fa-eye me-1"></i> प्रमाणपत्र हेर्नुहोस्

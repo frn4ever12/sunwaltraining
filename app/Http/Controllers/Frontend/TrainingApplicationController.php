@@ -28,4 +28,24 @@ class TrainingApplicationController extends Controller
     {
         return view('shared.messages.already-applied');
     }
+
+    public function viewCertificate($training)
+    {
+        $training = Training::select('id', 'start_miti_bs', 'end_miti_bs', 'institution_name_np', 'institution_name_eng', 'name_np', 'name_eng', 'start_miti_ad', 'end_miti_ad', 'department_id')->find($training);
+        
+        // Get the current user's certification for this training
+        $certification = \App\Models\TrainingCertification::where('training_id', $training->id)
+            ->whereHas('trainingApplication', function($q) {
+                $q->where('user_id', Auth::id());
+            })
+            ->where('status', '1')
+            ->with(['trainingApplication', 'certificate'])
+            ->first();
+
+        if (!$certification) {
+            return back()->with('error', 'प्रमाणपत्र उपलब्ध छैन।');
+        }
+
+        return view('admin.Trainings.Certifications.show', compact('training', 'certification'));
+    }
 }

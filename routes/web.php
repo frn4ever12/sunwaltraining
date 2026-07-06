@@ -56,6 +56,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->name('application-file.show')
         ->where('filePath', '.*')
         ->middleware(['signed', 'my_file']);
+
+    // Trainee certificate view route
+    Route::get('training-{training}/my-certificate', [TrainingApplicationController::class, 'viewCertificate'])
+        ->name('training-application.view-certificate');
 });
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

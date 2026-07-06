@@ -62,6 +62,15 @@
                     @endhasanyrole
                 @endcan
 
+                @role('trainee')
+                    <li class="nav-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+                        <a href="{{ route('dashboard') }}" aria-expanded="false">
+                            <i class="fas fa-certificate"></i>
+                            <p>मेरो प्रमाणपत्र</p>
+                        </a>
+                    </li>
+                @endrole
+
                 @can('budget_bibaran')
                     <li class="nav-item {{ request()->routeIs('admin.budgetBibaran.index') ? 'active' : '' }} ">
                         <a href="{{ route('admin.budgetBibaran.index') }}" aria-expanded="false">
