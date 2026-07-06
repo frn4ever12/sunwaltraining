@@ -72,7 +72,9 @@ class TrainingApplicationController extends Controller
             $this->authorize('view', $application);
             return view('admin.TrainingApplication.show', compact('training', 'application'));
         } catch (\Exception $e) {
-            return back()->with('error', 'समस्या आयो, डेटा देख्न सकिएन।');
+            \Log::error('TrainingApplication Show Error: ' . $e->getMessage());
+            \Log::error('Stack trace: ' . $e->getTraceAsString());
+            return back()->with('error', 'समस्या आयो: ' . $e->getMessage());
         }
     }
 

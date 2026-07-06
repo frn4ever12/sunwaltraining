@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('training_applications', function (Blueprint $table) {
             if (!Schema::hasColumn('training_applications', 'status')) {
-                $table->string('status')->default('draft')->after('remarks');
+                $table->string('status')->nullable()->default('draft')->after('remarks');
             }
             if (!Schema::hasColumn('training_applications', 'submitted_at')) {
                 $table->timestamp('submitted_at')->nullable()->after('status');
