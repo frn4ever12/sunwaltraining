@@ -29,7 +29,10 @@ class TrainingApplication extends Model
                 throw new \Exception("No active fiscal year found.");
             }
 
-            $yearPart = substr($latest->arthik_barsa, 0, 4);
+            // Convert Nepali digits to English digits and extract year part
+            $arthikBarsa = $latest->arthik_barsa;
+            $yearPart = preg_replace('/[^0-9]/', '', $arthikBarsa);
+            $yearPart = substr($yearPart, 0, 4);
 
             $lastApp = self::where('application_no', 'like', 'TMUN-' . $yearPart . '-%')
                 ->orderBy('id', 'desc')
