@@ -223,7 +223,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const link = e.target.closest('.notification-link');
         if (link) {
             e.preventDefault();
-            e.stopPropagation(); // Prevent dropdown from closing
             const id = link.dataset.id;
             const url = link.href;
             const notificationItem = link.closest('.dropdown-item');
