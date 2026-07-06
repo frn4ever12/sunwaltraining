@@ -128,6 +128,76 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="card stats-card flex-row align-items-center text-white border-0"
+                        style="background: linear-gradient(135deg, #059e7a, #28cba7); min-height: 140px;">
+                        <div class="p-4 d-flex align-items-center justify-content-center" style="flex: 0 0 100px;">
+                            <i class="fa fa-certificate fa-3x background-icon"></i>
+                        </div>
+                        <div class="flex-grow-1 py-3 px-4">
+                            <h3 class="fw-bold mb-1 npNum">
+                                {{ \App\Models\TrainingCertification::whereHas('trainingApplication', function($q) {
+                                    $q->where('user_id', Auth::id());
+                                })->where('status', '1')->count() ?? 0 }}
+                            </h3>
+                            <p class="mb-1 fs-5 fw-bold">मेरो प्रमाणपत्र</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 mt-4">
+                    <div class="card">
+                        <div class="card-header bg-main text-center">
+                            <h6 class="mb-0 fw-bold">मेरो प्रमाणपत्रहरू</h6>
+                        </div>
+                        <div class="card-body">
+                            @if(\App\Models\TrainingCertification::whereHas('trainingApplication', function($q) {
+                                $q->where('user_id', Auth::id());
+                            })->where('status', '1')->count() > 0)
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>तालिमको नाम</th>
+                                                <th>प्रमाणित मिति</th>
+                                                <th>कार्य</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @php
+                                                $certifications = \App\Models\TrainingCertification::whereHas('trainingApplication', function($q) {
+                                                    $q->where('user_id', Auth::id());
+                                                })->where('status', '1')->with(['training', 'certificate'])->get();
+                                            @endphp
+                                            @foreach($certifications as $cert)
+                                                <tr>
+                                                    <td>{{ $cert->training->name_np ?? '' }}</td>
+                                                    <td>{{ $cert->certified_date ?? '' }}</td>
+                                                    <td>
+                                                        @if($cert->certificate)
+                                                            <a href="{{ URL::temporarySignedRoute('file.show', now()->addMinutes(5), $cert->certificate->file_path) }}" 
+                                                               target="_blank" 
+                                                               class="btn btn-sm btn-primary">
+                                                                <i class="fa fa-download me-1"></i> डाउनलोड गर्नुहोस्
+                                                            </a>
+                                                        @else
+                                                            <span class="text-muted">प्रमाणपत्र उपलब्ध छैन</span>
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            @else
+                                <div class="text-center py-4">
+                                    <p class="text-muted">हाल कुनै प्रमाणपत्र उपलब्ध छैन।</p>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
             @endrole
         </div>
     </section>
