@@ -216,12 +216,21 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('click', function(e) {
         const link = e.target.closest('.notification-link');
         if (link) {
+            e.preventDefault();
+            e.stopPropagation(); // Prevent dropdown from closing
             const id = link.dataset.id;
+            
             fetch('{{ route("notifications.mark-read", ":id") }}'.replace(':id', id), {
                 method: 'POST',
                 headers: {
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
                     'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    loadNotifications();
                 }
             });
         }
