@@ -163,5 +163,21 @@
              </div>
          </div>
      </div>
+    <div class="card mb-4 no-print">
+        <div class="card-body">
+            <form method="POST" action="{{ route('admin.application.finalize', [$training->id, $application->id]) }}">
+                @csrf
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" id="agree_terms" name="agree_terms" required>
+                    <label class="form-check-label" for="agree_terms">
+                        मैले सर्त र अवस्था स्वीकार गरेको छु र सबै जानकारी सही रहेको पुष्टि गर्दछु।
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-success btn-lg">
+                    <i class="fa fa-paper-plane me-2"></i> आवेदन पेश गर्नुहोस्
+                </button>
+            </form>
+        </div>
+    </div>
  </div>
  <script src="{{ asset('Backend/assets/js/print.js') }}"></script>

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class TrainingApplication extends Model
 {
-    protected $fillable = ['user_id', 'training_id', 'fullname_np', 'fullname_eng','father_name','mother_name','grandfather_name','citizenship_no','citizenship_district_id', 'dob_bs', 'dob_ad', 'gender', 'email', 'contact_no', 'mobile_no','photo','nagrita_copy_front','nagrita_copy_back','application_miti_bs','remarks'];
+    protected $fillable = ['user_id', 'training_id', 'fullname_np', 'fullname_eng','father_name','mother_name','grandfather_name','citizenship_no','citizenship_district_id', 'dob_bs', 'dob_ad', 'gender', 'email', 'contact_no', 'mobile_no','photo','nagrita_copy_front','nagrita_copy_back','application_miti_bs','remarks','status','submitted_at'];
 
     protected static function boot()
     {

@@ -86,7 +86,36 @@ class TrainingApplicationController extends Controller
             return redirect()
                 ->route('admin.application.edit', [$training, $application])->with(['success' => 'सफलता! डेटा सफलतापूर्वक सुरक्षित भयो ।', 'education_tab' => true]);
         } catch (\Exception $e) {
-            return back()->with('error', 'समस्या आयो, डेटा मिलेन।');
+            \Log::error('TrainingApplication Update Error: ' . $e->getMessage());
+            \Log::error('Stack trace: ' . $e->getTraceAsString());
+            return back()->with('error', 'समस्या आयो: ' . $e->getMessage())->withInput();
+        }
+    }
+
+    public function finalize(Request $request, $training, $application)
+    {
+        $request->validate([
+            'agree_terms' => 'required|accepted'
+        ], [
+            'agree_terms.required' => 'कृपया सर्त र अवस्था स्वीकार गर्नुहोस्।',
+            'agree_terms.accepted' => 'कृपया सर्त र अवस्था स्वीकार गर्नुहोस्।'
+        ]);
+
+        try {
+            $applicationId = $this->trainingApplicationService->find($application);
+            $this->authorize('update', $applicationId);
+            
+            // Update application status to submitted
+            $applicationId->status = 'submitted';
+            $applicationId->submitted_at = now();
+            $applicationId->save();
+
+            return redirect()
+                ->route('admin.application.show', [$training, $application])->with('success', 'सफलता! आवेदन सफलतापूर्वक पेश भयो ।');
+        } catch (\Exception $e) {
+            \Log::error('TrainingApplication Finalize Error: ' . $e->getMessage());
+            \Log::error('Stack trace: ' . $e->getTraceAsString());
+            return back()->with('error', 'समस्या आयो: ' . $e->getMessage());
         }
     }
 

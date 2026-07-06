@@ -75,6 +75,7 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::get('training-{training}-application-{application}/show', [TrainingApplicationController::class, 'show'])->name('application.show')->middleware('can:apply_training');
     Route::get('training-{training}-application/{application}/edit', [TrainingApplicationController::class, 'edit'])->name('application.edit')->middleware(['can:apply_training','training_status','already_applied']);
     Route::put('training-{training}-application/{application}/update', [TrainingApplicationController::class, 'update'])->name('application.update')->middleware(['can:apply_training','training_status','already_applied']);
+    Route::post('training-{training}-application/{application}/finalize', [TrainingApplicationController::class, 'finalize'])->name('application.finalize')->middleware(['can:apply_training','training_status','already_applied']);
     Route::delete('training-application/{application}/destroy', [TrainingApplicationController::class, 'destroy'])->name('application.destroy')->middleware('can:manage_training');
     Route::put('training-application/{training}/update-status', [TrainingApplicationController::class, 'updateStatus'])->name('application.updateStatus')->middleware('can:manage_training');
     Route::resource('training', TrainingController::class)->except(['index'])->middleware(['can:training','can:manage_training']);
