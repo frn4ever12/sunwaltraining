@@ -49,7 +49,9 @@ class TrainingApplicationController extends Controller
             $result = $this->trainingApplicationService->store($validatedData);
             return to_route('admin.application.edit', [$id, $result->id])->with(['success' => 'सफलता! हजुरको व्यक्तिगत विवरण सफलतापूर्वक सुरक्षित भयो ।', 'education_tab' => true]);
         } catch (\Exception $e) {
-            return back()->with('error', 'समस्या आयो, डेटा मिलेन।');
+            \Log::error('TrainingApplication Store Error: ' . $e->getMessage());
+            \Log::error('Stack trace: ' . $e->getTraceAsString());
+            return back()->with('error', 'समस्या आयो: ' . $e->getMessage())->withInput();
         }
     }
 
