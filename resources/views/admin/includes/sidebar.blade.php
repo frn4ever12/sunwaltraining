@@ -52,6 +52,12 @@
                                 <p>आवेदनहरु </p>
                             </a>
                         </li>
+                        <li class="nav-item {{ request()->routeIs('admin.applicants.index') ? 'active' : '' }} ">
+                            <a href="{{ route('admin.applicants.index') }}" aria-expanded="false">
+                                <i class="fas fa-users"></i>
+                                <p>आवेदकहरु</p>
+                            </a>
+                        </li>
                     @else
                         <li class="nav-item {{ request()->routeIs('admin.my-training-application.index') ? 'active' : '' }} ">
                             <a href="{{ route('admin.my-training-application.index') }}" aria-expanded="false">
@@ -86,6 +92,25 @@
                             <i class="fas fa-id-card"></i>
                             <p> प्रमाणपत्रहरु </p>
                         </a>
+                    </li>
+                @endcan
+                @can('application')
+                    <li class="nav-item">
+                        <a data-bs-toggle="collapse" href="#reports" aria-expanded="false">
+                            <i class="fas fa-chart-bar"></i>
+                            <p>नयाँ प्रतिवेदन</p>
+                            <span class="caret"></span>
+                        </a>
+                        <div class="collapse" id="reports">
+                            <ul class="nav nav-collapse">
+                                <li><a href="{{ route('reports.training.list') }}" class="{{ request()->routeIs('reports.training.*') ? 'active' : '' }}">तालिम प्रतिवेदन</a></li>
+                                <li><a href="{{ route('reports.application.received') }}" class="{{ request()->routeIs('reports.application.*') ? 'active' : '' }}">आवेदन प्रतिवेदन</a></li>
+                                <li><a href="{{ route('reports.participant.list') }}" class="{{ request()->routeIs('reports.participant.*') ? 'active' : '' }}">सहभागी प्रतिवेदन</a></li>
+                                <li><a href="{{ route('reports.attendance.daily') }}" class="{{ request()->routeIs('reports.attendance.*') ? 'active' : '' }}">उपस्थिती प्रतिवेदन</a></li>
+                                <li><a href="{{ route('reports.trainer.list') }}" class="{{ request()->routeIs('reports.trainer.*') ? 'active' : '' }}">प्रशिक्षक प्रतिवेदन</a></li>
+                                <li><a href="{{ route('reports.certificate.issued') }}" class="{{ request()->routeIs('reports.certificate.*') ? 'active' : '' }}">प्रमाणपत्र प्रतिवेदन</a></li>
+                            </ul>
+                        </div>
                     </li>
                 @endcan
                 @canany(['prashikshan_pratibedan', 'aabedan_pratibedan'])

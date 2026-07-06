@@ -30,6 +30,8 @@ use App\Http\Controllers\Admin\TrainingAttendanceController;
 use App\Http\Controllers\Admin\TrainingCertificationController;
 use App\Http\Controllers\Admin\TrainingController;
 use App\Http\Controllers\Admin\WardController;
+use App\Http\Controllers\Admin\ApplicantController;
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\NotificationController;
 use Illuminate\Support\Facades\Route;
 
@@ -112,6 +114,47 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::get('notifications', [NotificationController::class, 'index'])->name('notifications.index');
     Route::post('notifications/{id}/mark-read', [NotificationController::class, 'markAsRead'])->name('notifications.mark-read');
     Route::post('notifications/mark-all-read', [NotificationController::class, 'markAllAsRead'])->name('notifications.mark-all-read');
+    Route::get('applicants', [ApplicantController::class, 'index'])->name('applicants.index')->middleware('can:application');
+
+    // Reports
+    Route::get('reports', [ReportController::class, 'index'])->name('reports.index');
+    
+    // Training Reports
+    Route::get('reports/training/list', [ReportController::class, 'trainingList'])->name('reports.training.list');
+    Route::get('reports/training/progress', [ReportController::class, 'trainingProgress'])->name('reports.training.progress');
+    Route::get('reports/training/completed', [ReportController::class, 'completedTraining'])->name('reports.training.completed');
+    Route::get('reports/training/summary', [ReportController::class, 'trainingSummary'])->name('reports.training.summary');
+    
+    // Application Reports
+    Route::get('reports/application/received', [ReportController::class, 'receivedApplications'])->name('reports.application.received');
+    Route::get('reports/application/approved', [ReportController::class, 'approvedApplications'])->name('reports.application.approved');
+    Route::get('reports/application/rejected', [ReportController::class, 'rejectedApplications'])->name('reports.application.rejected');
+    Route::get('reports/application/pending', [ReportController::class, 'pendingApplications'])->name('reports.application.pending');
+    
+    // Participant Reports
+    Route::get('reports/participant/list', [ReportController::class, 'participantList'])->name('reports.participant.list');
+    Route::get('reports/participant/by-training', [ReportController::class, 'participantByTraining'])->name('reports.participant.by-training');
+    Route::get('reports/participant/by-ward', [ReportController::class, 'participantByWard'])->name('reports.participant.by-ward');
+    Route::get('reports/participant/by-gender', [ReportController::class, 'participantByGender'])->name('reports.participant.by-gender');
+    Route::get('reports/participant/by-age', [ReportController::class, 'participantByAge'])->name('reports.participant.by-age');
+    Route::get('reports/participant/by-inclusion', [ReportController::class, 'participantByInclusion'])->name('reports.participant.by-inclusion');
+    
+    // Attendance Reports
+    Route::get('reports/attendance/daily', [ReportController::class, 'dailyAttendance'])->name('reports.attendance.daily');
+    Route::get('reports/attendance/monthly', [ReportController::class, 'monthlyAttendance'])->name('reports.attendance.monthly');
+    Route::get('reports/attendance/participant', [ReportController::class, 'participantAttendance'])->name('reports.attendance.participant');
+    Route::get('reports/attendance/absent', [ReportController::class, 'absentList'])->name('reports.attendance.absent');
+    
+    // Trainer Reports
+    Route::get('reports/trainer/list', [ReportController::class, 'trainerList'])->name('reports.trainer.list');
+    Route::get('reports/trainer/by-training', [ReportController::class, 'trainerByTraining'])->name('reports.trainer.by-training');
+    Route::get('reports/trainer/payment', [ReportController::class, 'trainerPayment'])->name('reports.trainer.payment');
+    Route::get('reports/trainer/evaluation', [ReportController::class, 'trainerEvaluation'])->name('reports.trainer.evaluation');
+    
+    // Certificate Reports
+    Route::get('reports/certificate/issued', [ReportController::class, 'issuedCertificates'])->name('reports.certificate.issued');
+    Route::get('reports/certificate/register', [ReportController::class, 'certificateRegister'])->name('reports.certificate.register');
+    Route::get('reports/certificate/download', [ReportController::class, 'certificateDownload'])->name('reports.certificate.download');
 
     Route::resource('gallery', GalleryController::class)->except('show')->middleware('can:gallery');
     Route::delete('/gallery/{galleryId}/photo/{photoId}', [GalleryController::class, 'deletePhoto'])->name('gallery.deletePhoto')->middleware('can:gallery');
