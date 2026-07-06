@@ -219,6 +219,7 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             e.stopPropagation(); // Prevent dropdown from closing
             const id = link.dataset.id;
+            const url = link.href;
             
             fetch('{{ route("notifications.mark-read", ":id") }}'.replace(':id', id), {
                 method: 'POST',
@@ -231,6 +232,8 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(data => {
                 if (data.success) {
                     loadNotifications();
+                    // Navigate to the application data
+                    window.location.href = url;
                 }
             });
         }
