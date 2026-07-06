@@ -12,7 +12,7 @@
                 </div>
                 <!-- कुल तालिम -->
                 <div class="col-lg-4 col-md-6 col-sm-12">
-                    <a href="{{ route('admin.trainings.index') }}" class="text-decoration-none">
+                    <a href="{{ route('training.index') }}" class="text-decoration-none">
                         <div class="card stats-card flex-row align-items-center text-white border-0"
                             style="background: linear-gradient(135deg, #f85008, #f42f2f); min-height: 140px; cursor: pointer;">
                             <div class="p-4 d-flex align-items-center justify-content-center" style="flex: 0 0 100px;">
@@ -29,17 +29,19 @@
 
                 <!-- कुल आवेदन -->
                 <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="card stats-card flex-row align-items-center text-white border-0"
-                        style="background: linear-gradient(135deg, #fad70b, #fdc305); min-height: 140px;">
-                        <div class="p-4 d-flex align-items-center justify-content-center" style="flex: 0 0 100px;">
-                            <i class="fa fa-file-alt fa-3x background-icon"></i>
-                        </div>
-                        <div class="flex-grow-1 py-3 px-4">
-                            <h3 class="fw-bold mb-1 npNum">{{ \App\Models\TrainingApplication::count() ?? 0 }}</h3>
-                            <p class="mb-1 fs-5 fw-bold">कुल आवेदन</p>
+                    <a href="{{ route('applicants.index') }}" class="text-decoration-none">
+                        <div class="card stats-card flex-row align-items-center text-white border-0"
+                            style="background: linear-gradient(135deg, #fad70b, #fdc305); min-height: 140px; cursor: pointer;">
+                            <div class="p-4 d-flex align-items-center justify-content-center" style="flex: 0 0 100px;">
+                                <i class="fa fa-file-alt fa-3x background-icon"></i>
+                            </div>
+                            <div class="flex-grow-1 py-3 px-4">
+                                <h3 class="fw-bold mb-1 npNum">{{ \App\Models\TrainingApplication::count() ?? 0 }}</h3>
+                                <p class="mb-1 fs-5 fw-bold">कुल आवेदन</p>
 
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     <a href="{{ route('admin.reports.application.approved') }}" class="text-decoration-none">
@@ -58,7 +60,7 @@
                 </div>
                 
                 <div class="col-lg-4 col-md-6 col-sm-12">
-                    <a href="{{ route('admin.trainings.index') }}?status=upcoming" class="text-decoration-none">
+                    <a href="{{ route('training.index') }}?status=upcoming" class="text-decoration-none">
                         <div class="card stats-card flex-row align-items-center text-white border-0"
                             style="background: linear-gradient(135deg, #06b865, rgb(6, 195, 154)); min-height: 140px; cursor: pointer;">
                             <div class="p-4 d-flex align-items-center justify-content-center" style="flex: 0 0 100px;">
@@ -94,7 +96,7 @@
 </div>
                 <!-- आगामी तालिम -->
                 <div class="col-lg-4 col-md-6 col-sm-12">
-                    <a href="{{ route('admin.trainings.index') }}?status=active" class="text-decoration-none">
+                    <a href="{{ route('training.index') }}?status=active" class="text-decoration-none">
                         <div class="card stats-card flex-row align-items-center text-white border-0"
                             style="background: linear-gradient(135deg, #f94144, #f3722c); min-height: 140px; cursor: pointer;">
                             <div class="p-4 d-flex align-items-center justify-content-center" style="flex: 0 0 100px;">
