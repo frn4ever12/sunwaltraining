@@ -12,7 +12,7 @@
                 </div>
                 <!-- कुल तालिम -->
                 <div class="col-lg-4 col-md-6 col-sm-12">
-                    <a href="{{ route('training.index') }}" class="text-decoration-none">
+                    <a href="{{ route('admin.training.index') }}" class="text-decoration-none">
                         <div class="card stats-card flex-row align-items-center text-white border-0"
                             style="background: linear-gradient(135deg, #f85008, #f42f2f); min-height: 140px; cursor: pointer;">
                             <div class="p-4 d-flex align-items-center justify-content-center" style="flex: 0 0 100px;">
@@ -29,7 +29,7 @@
 
                 <!-- कुल आवेदन -->
                 <div class="col-lg-4 col-md-6 col-sm-12">
-                    <a href="{{ route('reports.application.received') }}" class="text-decoration-none">
+                    <a href="{{ route('admin.reports.application.received') }}" class="text-decoration-none">
                         <div class="card stats-card flex-row align-items-center text-white border-0"
                             style="background: linear-gradient(135deg, #fad70b, #fdc305); min-height: 140px; cursor: pointer;">
                             <div class="p-4 d-flex align-items-center justify-content-center" style="flex: 0 0 100px;">
@@ -60,7 +60,7 @@
                 </div>
                 
                 <div class="col-lg-4 col-md-6 col-sm-12">
-                    <a href="{{ route('training.index') }}?status=upcoming" class="text-decoration-none">
+                    <a href="{{ route('admin.training.index') }}?status=upcoming" class="text-decoration-none">
                         <div class="card stats-card flex-row align-items-center text-white border-0"
                             style="background: linear-gradient(135deg, #06b865, rgb(6, 195, 154)); min-height: 140px; cursor: pointer;">
                             <div class="p-4 d-flex align-items-center justify-content-center" style="flex: 0 0 100px;">
@@ -96,7 +96,7 @@
 </div>
                 <!-- आगामी तालिम -->
                 <div class="col-lg-4 col-md-6 col-sm-12">
-                    <a href="{{ route('training.index') }}?status=active" class="text-decoration-none">
+                    <a href="{{ route('admin.training.index') }}?status=active" class="text-decoration-none">
                         <div class="card stats-card flex-row align-items-center text-white border-0"
                             style="background: linear-gradient(135deg, #f94144, #f3722c); min-height: 140px; cursor: pointer;">
                             <div class="p-4 d-flex align-items-center justify-content-center" style="flex: 0 0 100px;">
