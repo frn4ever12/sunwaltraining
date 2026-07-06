@@ -42,7 +42,7 @@ class RegisteredUserController extends Controller
             'dob_bs' => ['nullable', 'date'],
             'dob_ad' => ['nullable', 'date'],
             'gender' => ['nullable', 'in:male,female,others'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
