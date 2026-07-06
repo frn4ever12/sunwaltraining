@@ -38,7 +38,7 @@
             </div>
         </div>
         <div id="filterForm" class="collapse card-body">
-            <form method="GET" id="filterData" action="{{ route('reports.trainer.list') }}">
+            <form method="GET" id="filterData" action="{{ route('admin.reports.trainer.list') }}">
                 <div class="row g-2">
                     <div class="form-group col-md-6 col-12">
                         <input type="text" name="name" class="form-control" placeholder="नाम"
@@ -52,7 +52,7 @@
                         <button type="submit" class="btn btn-primary w-100">खोज्नुहोस्</button>
                     </div>
                     <div class="form-group col-md-6 col-12">
-                        <a href="{{ route('reports.trainer.list') }}" class="btn btn-secondary w-100">रिसेट</a>
+                        <a href="{{ route('admin.reports.trainer.list') }}" class="btn btn-secondary w-100">रिसेट</a>
                     </div>
                 </div>
             </form>

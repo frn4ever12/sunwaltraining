@@ -38,7 +38,7 @@
             </div>
         </div>
         <div id="filterForm" class="collapse card-body">
-            <form method="GET" id="filterData" action="{{ route('reports.attendance.monthly') }}">
+            <form method="GET" id="filterData" action="{{ route('admin.reports.attendance.monthly') }}">
                 <div class="row g-2">
                     <div class="form-group col-md-3 col-12">
                         <select name="month" class="form-control">
@@ -68,7 +68,7 @@
                         <button type="submit" class="btn btn-primary w-100">खोज्नुहोस्</button>
                     </div>
                     <div class="form-group col-md-3 col-12">
-                        <a href="{{ route('reports.attendance.monthly') }}" class="btn btn-secondary w-100">रिसेट</a>
+                        <a href="{{ route('admin.reports.attendance.monthly') }}" class="btn btn-secondary w-100">रिसेट</a>
                     </div>
                 </div>
             </form>

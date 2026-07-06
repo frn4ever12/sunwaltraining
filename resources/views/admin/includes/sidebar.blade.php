@@ -103,12 +103,12 @@
                         </a>
                         <div class="collapse" id="reports">
                             <ul class="nav nav-collapse">
-                                <li><a href="{{ route('reports.training.list') }}" class="{{ request()->routeIs('reports.training.*') ? 'active' : '' }}">तालिम प्रतिवेदन</a></li>
-                                <li><a href="{{ route('reports.application.received') }}" class="{{ request()->routeIs('reports.application.*') ? 'active' : '' }}">आवेदन प्रतिवेदन</a></li>
-                                <li><a href="{{ route('reports.participant.list') }}" class="{{ request()->routeIs('reports.participant.*') ? 'active' : '' }}">सहभागी प्रतिवेदन</a></li>
-                                <li><a href="{{ route('reports.attendance.daily') }}" class="{{ request()->routeIs('reports.attendance.*') ? 'active' : '' }}">उपस्थिती प्रतिवेदन</a></li>
-                                <li><a href="{{ route('reports.trainer.list') }}" class="{{ request()->routeIs('reports.trainer.*') ? 'active' : '' }}">प्रशिक्षक प्रतिवेदन</a></li>
-                                <li><a href="{{ route('reports.certificate.issued') }}" class="{{ request()->routeIs('reports.certificate.*') ? 'active' : '' }}">प्रमाणपत्र प्रतिवेदन</a></li>
+                                <li><a href="{{ route('admin.reports.training.list') }}" class="{{ request()->routeIs('admin.reports.training.*') ? 'active' : '' }}">तालिम प्रतिवेदन</a></li>
+                                <li><a href="{{ route('admin.reports.application.received') }}" class="{{ request()->routeIs('admin.reports.application.*') ? 'active' : '' }}">आवेदन प्रतिवेदन</a></li>
+                                <li><a href="{{ route('admin.reports.participant.list') }}" class="{{ request()->routeIs('admin.reports.participant.*') ? 'active' : '' }}">सहभागी प्रतिवेदन</a></li>
+                                <li><a href="{{ route('admin.reports.attendance.daily') }}" class="{{ request()->routeIs('admin.reports.attendance.*') ? 'active' : '' }}">उपस्थिती प्रतिवेदन</a></li>
+                                <li><a href="{{ route('admin.reports.trainer.list') }}" class="{{ request()->routeIs('admin.reports.trainer.*') ? 'active' : '' }}">प्रशिक्षक प्रतिवेदन</a></li>
+                                <li><a href="{{ route('admin.reports.certificate.issued') }}" class="{{ request()->routeIs('admin.reports.certificate.*') ? 'active' : '' }}">प्रमाणपत्र प्रतिवेदन</a></li>
                             </ul>
                         </div>
                     </li>
