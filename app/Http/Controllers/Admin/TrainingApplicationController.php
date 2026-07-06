@@ -113,16 +113,21 @@ class TrainingApplicationController extends Controller
             $applicationId->save();
 
             // Send notification to superadmin
-            $superadmins = \App\Models\User::role('super-admin')->get();
-            foreach ($superadmins as $superadmin) {
-                \App\Models\Notification::create([
-                    'user_id' => $superadmin->id,
-                    'type' => 'application_submitted',
-                    'title' => 'नयाँ आवेदन प्राप्त',
-                    'message' => $applicationId->fullname_np . ' ले आवेदन पेश गरेका छन्।',
-                    'link' => route('admin.application.show', [$training, $application]),
-                    'is_read' => false
-                ]);
+            try {
+                $superadmins = \App\Models\User::role('super-admin')->get();
+                foreach ($superadmins as $superadmin) {
+                    \App\Models\Notification::create([
+                        'user_id' => $superadmin->id,
+                        'type' => 'application_submitted',
+                        'title' => 'नयाँ आवेदन प्राप्त',
+                        'message' => $applicationId->fullname_np . ' ले आवेदन पेश गरेका छन्।',
+                        'link' => route('admin.application.show', [$training, $application]),
+                        'is_read' => false
+                    ]);
+                }
+            } catch (\Exception $notificationError) {
+                \Log::error('Notification Error: ' . $notificationError->getMessage());
+                // Continue even if notification fails
             }
 
             return redirect()
