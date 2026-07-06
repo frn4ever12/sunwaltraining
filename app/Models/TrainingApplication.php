@@ -34,20 +34,20 @@ class TrainingApplication extends Model
             $yearPart = preg_replace('/[^0-9]/', '', $arthikBarsa);
             $yearPart = substr($yearPart, 0, 4);
 
-            $lastApp = self::where('application_no', 'like', 'TMUN-' . $yearPart . '-%')
+            $lastApp = self::where('application_no', 'like', 'SMUN-' . $yearPart . '-%')
                 ->orderBy('id', 'desc')
                 ->lockForUpdate()
                 ->first();
 
             $lastNumber = 0;
 
-            if ($lastApp && preg_match('/TMUN-' . $yearPart . '-(\d+)/', $lastApp->application_no, $matches)) {
+            if ($lastApp && preg_match('/SMUN-' . $yearPart . '-(\d+)/', $lastApp->application_no, $matches)) {
                 $lastNumber = (int) $matches[1];
             }
 
             $nextNumber = $lastNumber + 1;
 
-            return 'TMUN-' . $yearPart . '-' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
+            return 'SMUN-' . $yearPart . '-' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
         });
     }
 
