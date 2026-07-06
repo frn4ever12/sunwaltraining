@@ -12,8 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('training_applications', function (Blueprint $table) {
-            $table->string('status')->default('draft')->after('remarks');
-            $table->timestamp('submitted_at')->nullable()->after('status');
+            if (!Schema::hasColumn('training_applications', 'status')) {
+                $table->string('status')->default('draft')->after('remarks');
+            }
+            if (!Schema::hasColumn('training_applications', 'submitted_at')) {
+                $table->timestamp('submitted_at')->nullable()->after('status');
+            }
         });
     }
 
@@ -23,7 +27,12 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('training_applications', function (Blueprint $table) {
-            $table->dropColumn(['status', 'submitted_at']);
+            if (Schema::hasColumn('training_applications', 'submitted_at')) {
+                $table->dropColumn('submitted_at');
+            }
+            if (Schema::hasColumn('training_applications', 'status')) {
+                $table->dropColumn('status');
+            }
         });
     }
 };
