@@ -46,6 +46,9 @@ class TrainingApplicationController extends Controller
             return back()->with('error', 'प्रमाणपत्र उपलब्ध छैन।');
         }
 
-        return view('admin.Trainings.Certifications.show', compact('training', 'certification'));
+        // Wrap in collection to match view expectation
+        $datas = collect([$certification]);
+
+        return view('admin.Trainings.Certifications.show', compact('training', 'datas'));
     }
 }
