@@ -105,7 +105,7 @@
 @endsection
 
 @section('scripts')
-    @include('admin.includes.datatables-js')
+    @include('admin.includes.datatables-scripts')
     <script>
         $(document).ready(function() {
             $('#trainingProgressTable').DataTable({
