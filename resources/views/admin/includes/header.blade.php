@@ -57,14 +57,14 @@
             <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
 
                 <!-- Notification Bell -->
-                <li class="nav-item topbar-notification dropdown hidden-caret">
-                    <a class="dropdown-toggle position-relative" data-bs-toggle="dropdown" href="#" aria-expanded="false">
+                <li class="nav-item topbar-notification dropdown hidden-caret show">
+                    <a class="dropdown-toggle position-relative" href="#" aria-expanded="true" id="notification-bell">
                         <i class="fas fa-bell text-white"></i>
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger notification-badge" style="display: none;">
                             0
                         </span>
                     </a>
-                    <ul class="dropdown-menu dropdown-notification animated fadeIn" style="width: 350px;">
+                    <ul class="dropdown-menu dropdown-notification animated fadeIn show" style="width: 350px;">
                         <li>
                             <div class="dropdown-header d-flex justify-content-between align-items-center">
                                 <span>नोटिफिकेसनहरू</span>
@@ -142,6 +142,12 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // Prevent bell icon from closing dropdown
+    document.getElementById('notification-bell')?.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    });
+
     // Load notifications
     function loadNotifications() {
         fetch('{{ route("notifications.index") }}')
