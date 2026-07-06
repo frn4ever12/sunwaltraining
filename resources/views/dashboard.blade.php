@@ -176,7 +176,7 @@
                                                     <td>{{ $cert->certified_date ?? '' }}</td>
                                                     <td>
                                                         @if($cert->certificate)
-                                                            <a href="{{ URL::temporarySignedRoute('file.show', now()->addMinutes(5), $cert->certificate->file_path) }}" 
+                                                            <a href="{{ URL::temporarySignedRoute('file.show', now()->addMinutes(5), ['filePath' => $cert->certificate->file_path]) }}" 
                                                                target="_blank" 
                                                                class="btn btn-sm btn-primary">
                                                                 <i class="fa fa-download me-1"></i> डाउनलोड गर्नुहोस्
