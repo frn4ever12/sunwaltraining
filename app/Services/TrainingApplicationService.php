@@ -62,12 +62,12 @@ class TrainingApplicationService
                 $this->deleteOldImage($oldphoto, 'private');
             }
             if (isset($data['nagrita_copy_front'])) {
-                $oldnagrita = $application->nagrita_copy;
+                $oldnagrita = $application->nagrita_copy_front;
                 $data['nagrita_copy_front'] = $this->uploadImage($data['nagrita_copy_front'], 'application/nagrita_copy_front/', 'private');
                 $this->deleteOldImage($oldnagrita, 'private');
             }
             if (isset($data['nagrita_copy_back'])) {
-                $oldnagrita = $application->nagrita_copy;
+                $oldnagrita = $application->nagrita_copy_back;
                 $data['nagrita_copy_back'] = $this->uploadImage($data['nagrita_copy_back'], 'application/nagrita_copy_back/', 'private');
                 $this->deleteOldImage($oldnagrita, 'private');
             }
