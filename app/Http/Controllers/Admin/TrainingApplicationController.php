@@ -112,6 +112,19 @@ class TrainingApplicationController extends Controller
             $applicationId->submitted_at = now();
             $applicationId->save();
 
+            // Send notification to superadmin
+            $superadmins = \App\Models\User::role('super-admin')->get();
+            foreach ($superadmins as $superadmin) {
+                \App\Models\Notification::create([
+                    'user_id' => $superadmin->id,
+                    'type' => 'application_submitted',
+                    'title' => 'नयाँ आवेदन प्राप्त',
+                    'message' => $applicationId->fullname_np . ' ले आवेदन पेश गरेका छन्।',
+                    'link' => route('admin.application.show', [$training, $application]),
+                    'is_read' => false
+                ]);
+            }
+
             return redirect()
                 ->route('admin.application.show', [$training, $application])->with('success', 'सफलता! आवेदन सफलतापूर्वक पेश भयो ।');
         } catch (\Exception $e) {

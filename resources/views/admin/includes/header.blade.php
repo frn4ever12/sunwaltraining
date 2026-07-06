@@ -56,6 +56,29 @@
             </div>
             <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
 
+                <!-- Notification Bell -->
+                <li class="nav-item topbar-notification dropdown hidden-caret">
+                    <a class="dropdown-toggle position-relative" data-bs-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fas fa-bell text-white"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger notification-badge" style="display: none;">
+                            0
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-notification animated fadeIn" style="width: 350px;">
+                        <li>
+                            <div class="dropdown-header d-flex justify-content-between align-items-center">
+                                <span>नोटिफिकेसनहरू</span>
+                                <a href="#" class="mark-all-read text-decoration-none small">सबै पढिसक्यो</a>
+                            </div>
+                        </li>
+                        <li class="scrollbar-outer notification-list">
+                            <div class="dropdown-divider"></div>
+                            <div class="text-center py-3 no-notifications" style="display: none;">
+                                <p class="text-muted mb-0">कुनै नोटिफिकेसन छैन</p>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
 
                 <li class="nav-item topbar-user dropdown hidden-caret">
                     <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#"
@@ -116,3 +139,92 @@
     </nav>
     <!-- End Navbar -->
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Load notifications
+    function loadNotifications() {
+        fetch('{{ route("notifications.index") }}')
+            .then(response => response.json())
+            .then(data => {
+                const badge = document.querySelector('.notification-badge');
+                const notificationList = document.querySelector('.notification-list');
+                const noNotifications = document.querySelector('.no-notifications');
+                
+                // Update badge
+                if (data.unread_count > 0) {
+                    badge.style.display = 'block';
+                    badge.textContent = data.unread_count > 9 ? '9+' : data.unread_count;
+                } else {
+                    badge.style.display = 'none';
+                }
+                
+                // Update notification list
+                if (data.notifications.length > 0) {
+                    noNotifications.style.display = 'none';
+                    notificationList.innerHTML = '<div class="dropdown-divider"></div>';
+                    
+                    data.notifications.forEach(notification => {
+                        const item = document.createElement('div');
+                        item.className = 'dropdown-item ' + (notification.is_read ? 'read' : 'unread');
+                        item.innerHTML = `
+                            <a href="${notification.link}" class="notification-link" data-id="${notification.id}">
+                                <div class="d-flex align-items-start">
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-1">${notification.title}</h6>
+                                        <p class="mb-1 small text-muted">${notification.message}</p>
+                                        <small class="text-muted">${new Date(notification.created_at).toLocaleString()}</small>
+                                    </div>
+                                    ${!notification.is_read ? '<span class="badge bg-primary ms-2">नयाँ</span>' : ''}
+                                </div>
+                            </a>
+                        `;
+                        notificationList.appendChild(item);
+                    });
+                } else {
+                    noNotifications.style.display = 'block';
+                }
+            })
+            .catch(error => console.error('Error loading notifications:', error));
+    }
+    
+    // Initial load
+    loadNotifications();
+    
+    // Refresh notifications every 30 seconds
+    setInterval(loadNotifications, 30000);
+    
+    // Mark all as read
+    document.querySelector('.mark-all-read')?.addEventListener('click', function(e) {
+        e.preventDefault();
+        fetch('{{ route("notifications.mark-all-read") }}', {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                loadNotifications();
+            }
+        });
+    });
+    
+    // Mark single notification as read when clicked
+    document.addEventListener('click', function(e) {
+        const link = e.target.closest('.notification-link');
+        if (link) {
+            const id = link.dataset.id;
+            fetch('{{ route("notifications.mark-read", ":id") }}'.replace(':id', id), {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                    'Content-Type': 'application/json'
+                }
+            });
+        }
+    });
+});
+</script>

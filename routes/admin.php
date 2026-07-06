@@ -30,6 +30,7 @@ use App\Http\Controllers\Admin\TrainingAttendanceController;
 use App\Http\Controllers\Admin\TrainingCertificationController;
 use App\Http\Controllers\Admin\TrainingController;
 use App\Http\Controllers\Admin\WardController;
+use App\Http\Controllers\NotificationController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth','verified'])->group(function () {
@@ -108,6 +109,9 @@ Route::middleware(['auth','verified'])->group(function () {
 
     Route::resource('contact', ContactController::class)->middleware('can:contact_us');
     Route::resource('certificate', CertificateController::class)->middleware('can:certificate');
+    Route::get('notifications', [NotificationController::class, 'index'])->name('notifications.index');
+    Route::post('notifications/{id}/mark-read', [NotificationController::class, 'markAsRead'])->name('notifications.mark-read');
+    Route::post('notifications/mark-all-read', [NotificationController::class, 'markAllAsRead'])->name('notifications.mark-all-read');
 
     Route::resource('gallery', GalleryController::class)->except('show')->middleware('can:gallery');
     Route::delete('/gallery/{galleryId}/photo/{photoId}', [GalleryController::class, 'deletePhoto'])->name('gallery.deletePhoto')->middleware('can:gallery');
