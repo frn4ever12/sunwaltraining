@@ -176,10 +176,10 @@
                                                     <td>{{ $cert->certified_date ?? '' }}</td>
                                                     <td>
                                                         @if($cert->certificate)
-                                                            <a href="{{ URL::temporarySignedRoute('file.show', now()->addMinutes(5), ['filePath' => $cert->certificate->file_path]) }}" 
+                                                            <a href="{{ route('admin.certifications.show', $cert->training->id) }}" 
                                                                target="_blank" 
                                                                class="btn btn-sm btn-primary">
-                                                                <i class="fa fa-download me-1"></i> डाउनलोड गर्नुहोस्
+                                                                <i class="fa fa-eye me-1"></i> प्रमाणपत्र हेर्नुहोस्
                                                             </a>
                                                         @else
                                                             <span class="text-muted">प्रमाणपत्र उपलब्ध छैन</span>
