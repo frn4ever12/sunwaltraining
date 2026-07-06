@@ -15,7 +15,7 @@
 
 
         .nav-tabs .nav-link.active .tab-number {
-            color: rgb(255, 0, 0);
+            color: #ffffff;
         }
 
         .review-item {
@@ -38,7 +38,7 @@
         }
 
         .nav-tabs {
-            background-color: red;
+            background-color: #007bff;
         }
 
         .nav-tabs .nav-item .nav-link {
@@ -47,7 +47,7 @@
         }
 
         .nav-tabs .nav-item .nav-link.active {
-            color: red;
+            color: #007bff;
         }
     </style>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />

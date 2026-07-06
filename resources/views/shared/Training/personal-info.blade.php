@@ -125,10 +125,9 @@
                 @enderror
             </div>
             <div class="col-md-4 col-sm-12">
-                <label for="photo" class="form-label">फोटो<span class="text-danger">*</span></label>
+                <label for="photo" class="form-label">फोटो</label>
                 <input type="file" class="form-control {{ $errors->has('photo') ? 'is-invalid' : '' }}"
-                    id="photo" name="photo" {{ isset($application->photo) ? '' : 'required' }}
-                    accept="image/*">
+                    id="photo" name="photo" accept="image/*">
                 @if (isset($application->photo))
                     <a target="_blank"
                         href="{{ URL::temporarySignedRoute('application-file.show', now()->addMinutes(2), $application->photo) }}"
@@ -139,12 +138,10 @@
                 @enderror
             </div>
             <div class="col-md-4 col-sm-12">
-                <label for="nagrita_copy_front" class="form-label">नागरिकता अगाडि<span
-                        class="text-danger">*</span></label>
+                <label for="nagrita_copy_front" class="form-label">नागरिकता अगाडि</label>
                 <input type="file"
                     class="form-control {{ $errors->has('nagrita_copy_front') ? 'is-invalid' : '' }}"
-                    id="nagrita_copy_front" name="nagrita_copy_front" accept=".jpg,.png,image/*,.pdf"
-                    {{ isset($application->nagrita_copy_front) ? '' : 'required' }}>
+                    id="nagrita_copy_front" name="nagrita_copy_front" accept=".jpg,.png,image/*,.pdf">
                 @if (isset($application->nagrita_copy_front))
                     <a target="_blank"
                         href="{{ URL::temporarySignedRoute('application-file.show', now()->addMinutes(2), $application->nagrita_copy_front) }}"
@@ -158,12 +155,10 @@
             </div>
 
             <div class="col-md-4 col-sm-12">
-                <label for="nagrita_copy_back" class="form-label">नागरिकता पछाडि<span
-                        class="text-danger">*</span></label>
+                <label for="nagrita_copy_back" class="form-label">नागरिकता पछाडि</label>
                 <input type="file"
                     class="form-control {{ $errors->has('nagrita_copy_back') ? 'is-invalid' : '' }}"
-                    id="nagrita_copy_back" name="nagrita_copy_back" accept=".jpg,.png,image/*,.pdf"
-                    {{ isset($application->nagrita_copy_back) ? '' : 'required' }}>
+                    id="nagrita_copy_back" name="nagrita_copy_back" accept=".jpg,.png,image/*,.pdf">
                 @if (isset($application->nagrita_copy_back))
                     <a target="_blank"
                         href="{{ URL::temporarySignedRoute('application-file.show', now()->addMinutes(2), $application->nagrita_copy_back) }}"
@@ -228,7 +223,7 @@
                     <option value="">--कृपया छान्नुहोस्--</option>
                     @foreach (\App\Models\Province::get() as $province)
                         <option value="{{ $province->id }}"
-                            {{ old('sthyayi_province_id', $application->theganaDetail->sthyayi_province_id ?? '5') == $province->id ? 'selected' : '' }}>
+                            {{ old('sthyayi_province_id', $application->theganaDetail->sthyayi_province_id ?? '') == $province->id ? 'selected' : '' }}>
                             {{ $province->name }}</option>
                     @endforeach
                 </select>
@@ -244,7 +239,7 @@
                     <option value="">--कृपया छान्नुहोस्--</option>
                     @foreach (\App\Models\District::get() as $district)
                         <option value="{{ $district->id }}"
-                            {{ old('sthyayi_district_id', $application->theganaDetail->sthyayi_district_id ?? '58') == $district->id ? 'selected' : '' }}>
+                            {{ old('sthyayi_district_id', $application->theganaDetail->sthyayi_district_id ?? '') == $district->id ? 'selected' : '' }}>
                             {{ $district->name }}
                         </option>
                     @endforeach
@@ -261,7 +256,7 @@
                     <option value="">--कृपया छान्नुहोस्--</option>
                     @foreach (\App\Models\SthaniyaTaha::get() as $area)
                         <option value="{{ $area->id }}"
-                            {{ old('sthyayi_sthaniya_taha_id', $application->theganaDetail->sthyayi_sthaniya_taha_id ?? '576') == $area->id ? 'selected' : '' }}>
+                            {{ old('sthyayi_sthaniya_taha_id', $application->theganaDetail->sthyayi_sthaniya_taha_id ?? '') == $area->id ? 'selected' : '' }}>
                             {{ $area->name }}
                         </option>
                     @endforeach
@@ -314,7 +309,7 @@
                     <option value="">--कृपया छान्नुहोस्--</option>
                     @foreach (\App\Models\Province::get() as $province)
                         <option value="{{ $province->id }}"
-                            {{ old('asthyayi_province_id', $application->theganaDetail->asthyayi_province_id ?? '5') == $province->id ? 'selected' : '' }}>
+                            {{ old('asthyayi_province_id', $application->theganaDetail->asthyayi_province_id ?? '') == $province->id ? 'selected' : '' }}>
                             {{ $province->name }}
                         </option>
                     @endforeach
@@ -413,7 +408,7 @@
 
         <div class="text-end mt-4">
             <button class="btn btn-primary next-tab" type="submit"> <i class="fa fa-save me-2"></i>
-                सुरक्षित गर्नुहोस्</button>
+                सुरक्षित गर्नुहोस् र अगाडि बढ्नुहोस्</button>
         </div>
 
     </form>
