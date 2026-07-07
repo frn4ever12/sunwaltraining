@@ -42,11 +42,11 @@
     <script>
         window.wardGenderData = {};
 
-        @foreach ( as )
-            window.wardGenderData["{{ ->id }}"] = {
-                male_count: {{ ->male_count }},
-                female_count: {{ ->female_count }},
-                total_count: {{ ->total_count }}
+        @foreach ($wards as $ward)
+            window.wardGenderData["{{ $ward->id }}"] = {
+                male_count: {{ $ward->male_count }},
+                female_count: {{ $ward->female_count }},
+                total_count: {{ $ward->total_count }}
             };
         @endforeach
     </script>
