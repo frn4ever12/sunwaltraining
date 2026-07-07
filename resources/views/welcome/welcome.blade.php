@@ -9,6 +9,7 @@
         @include('welcome.partials.trainings')
 
         <div class="row g-3 my-3">
+            @include('welcome.partials.event-calendar')
             @include('welcome.partials.ward-map')
             @include('welcome.partials.ward-table')
         </div>
