@@ -37,6 +37,11 @@ class TrainingController extends Controller
         return view('admin.Trainings.form', compact('districts', 'provinces', 'sthaniya_tahas', 'wards'));
     }
 
+    public function calendar()
+    {
+        return view('admin.Trainings.calendar');
+    }
+
     public function store(TrainingRequest $request)
     {
         try {

@@ -40,9 +40,12 @@
                                 class="form-control nepali-datepicker" placeholder="मिति सम्म"
                                 value="{{ request('end_date') }}">
                         </div>
-                        <div class="col-md-2 col-sm-12">
-                            <button class="btn btn-main w-100"><i class="fa fa-search me-2"></i>खोज्नुहोस्</button>
-                        </div>
+                <div class="d-flex justify-content-end gap-2">
+                    <a href="{{ route('training.calendar') }}" class="btn btn-main">
+                        <i class="fas fa-calendar-alt me-2"></i>क्यालेन्डर
+                    </a>
+                    <button class="btn btn-main"><i class="fa fa-search me-2"></i>खोज्नुहोस्</button>
+                </div>
                     </div>
                 </form>
             </div>

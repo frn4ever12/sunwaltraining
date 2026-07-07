@@ -71,6 +71,7 @@ Route::middleware(['auth','verified'])->group(function () {
 
     Route::resource('training', TrainingController::class)->except(['index'])->middleware(['can:training', 'can:manage_training']);
     Route::get('training', [TrainingController::class, 'index'])->name('training.index')->middleware('can:training');
+    Route::get('training/calendar', [TrainingController::class, 'calendar'])->name('training.calendar')->middleware('can:training');
     Route::get('training/calendar-events', [TrainingController::class, 'calendarEvents'])->name('training.calendar-events');
 
     Route::get('training-applications', [TrainingApplicationController::class, 'index'])->name('application.index')->middleware('can:apply_training');

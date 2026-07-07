@@ -68,6 +68,10 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-end gap-2">
+                    <a href="{{ route('admin.training.calendar') }}" class="btn btn-primary">
+                        <i class="fas fa-calendar-alt"></i>
+                        क्यालेन्डर
+                    </a>
                     <button type="submit" class="btn btn-success">
                         <i class="fas fa-check"></i>
                         खोज्नुहोस्
