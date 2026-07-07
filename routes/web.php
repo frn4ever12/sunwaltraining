@@ -74,6 +74,8 @@ Route::middleware(['auth'])->group(function () {
 });
 Route::get('/training', [TrainingController::class, 'index'])->name('training.index');
 Route::get('/training/{id}', [TrainingController::class, 'show'])->name('training.show');
+Route::get('/training/calendar', [TrainingController::class, 'calendar'])->name('training.calendar');
+Route::get('/training/calendar-events', [TrainingController::class, 'calendarEvents'])->name('training.calendar-events');
 Route::get('/samachar', [PrakashanController::class, 'samachar'])->name('samachar.index');
 Route::get('/notice', [PrakashanController::class, 'notice'])->name('notice.index');
 Route::get('/karyabidhi', [PrakashanController::class, 'karyabidhi'])->name('karyabidhi.index');

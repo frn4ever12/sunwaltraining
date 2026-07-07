@@ -30,4 +30,47 @@ class TrainingController extends Controller
 
         return view('frontend.Training.show', compact('training'));
     }
+
+    public function calendar()
+    {
+        return view('frontend.Training.calendar');
+    }
+
+    public function calendarEvents()
+    {
+        $trainings = Training::select('id', 'name_np', 'name_eng', 'start_miti_bs', 'end_miti_bs', 'start_miti_ad', 'end_miti_ad', 'status')
+            ->where('status', '!=', 'dismissed')
+            ->get();
+
+        $events = [];
+        foreach ($trainings as $training) {
+            $events[] = [
+                'id' => $training->id,
+                'title' => $training->name_np ?? $training->name_eng,
+                'start' => $training->start_miti_ad,
+                'end' => $training->end_miti_ad,
+                'start_bs' => $training->start_miti_bs,
+                'end_bs' => $training->end_miti_bs,
+                'backgroundColor' => $this->getStatusColor($training->status),
+                'borderColor' => $this->getStatusColor($training->status),
+                'url' => route('training.show', $training->id),
+                'extendedProps' => [
+                    'status' => $training->status,
+                    'status_np' => __('messages.' . $training->status)
+                ]
+            ];
+        }
+
+        return response()->json($events);
+    }
+
+    private function getStatusColor($status)
+    {
+        return match($status) {
+            'active' => '#28a745',
+            'upcoming' => '#ffc107',
+            'completed' => '#6c757d',
+            default => '#007bff',
+        };
+    }
 }
