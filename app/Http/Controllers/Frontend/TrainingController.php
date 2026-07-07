@@ -31,11 +31,6 @@ class TrainingController extends Controller
         return view('frontend.Training.show', compact('training'));
     }
 
-    public function calendar()
-    {
-        return view('frontend.Training.calendar');
-    }
-
     public function calendarEvents()
     {
         $trainings = Training::select('id', 'name_np', 'name_eng', 'start_miti_bs', 'end_miti_bs', 'start_miti_ad', 'end_miti_ad', 'status')
