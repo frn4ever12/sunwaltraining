@@ -17,7 +17,7 @@
     @include('welcome.partials.success-stories')
 
     <!-- Partners Section -->
-    @include('welcome.partners.partners')
+    @include('welcome.partials.partners')
 
     <!-- Photo Gallery Section -->
     @include('welcome.partials.photo-gallery')
