@@ -65,12 +65,6 @@
             @endif
         </div>
 
-        @if(isset($trainings) && $trainings->hasPages())
-            <div class="d-flex justify-content-center mt-4">
-                {{ $trainings->withQueryString()->links() }}
-            </div>
-        @endif
-
         <div class="text-center mt-4" data-aos="fade-up">
             <a href="{{ route('training.index') }}" class="btn btn-outline-primary btn-lg">
                 <i class="fas fa-arrow-right me-2"></i>सबै तालिमहरू हेर्नुहोस्
